@@ -44,7 +44,7 @@ def layout():
                 ),
                 width=5
             )
-        ]),
+        ], style={'paddingTop': '5px'}),
         dbc.Row([
             dbc.Col(dcc.Graph(id='depth-graph'), width=8),
             dbc.Col(html.Div([html.Div([
@@ -60,7 +60,7 @@ def layout():
                     'width': '200px',
                     'overflowY': 'scroll',
                     'padding': '10px',
-                    'border': '2px solid #2ECC71',
+                    'border': '2px solid #137ea7',
                     'borderRadius': '10px',
                     'display': 'flex',
                     'flexDirection': 'column',
