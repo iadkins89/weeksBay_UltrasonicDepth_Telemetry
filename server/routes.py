@@ -26,7 +26,6 @@ def setup_routes(server):
 
     @server.route('/eventsource')
     def eventsource():
-        #sensor_name = request.args.get('name', default='', type=str)
         def generate():
             with server.app_context():
                 while True:
