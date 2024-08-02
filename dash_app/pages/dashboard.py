@@ -1,36 +1,26 @@
 from dash import dcc, html, register_page
+import dash_table
 import dash_bootstrap_components as dbc
-from datetime import datetime
-from dash_extensions import EventSource
+from datetime import datetime, timedelta
 
 register_page(
-	__name__,
-	top_nav=True,
-	path='/dashboard'
+    __name__,
+    top_nav=True,
+    path='/dashboard'
 )
-
 
 def layout():
     datums = ["MLLW", "MLW", "MSL", "MTL", "MHW", "MHHW", "STND"]
-    layout = dbc.Container([
+
+    return dbc.Container([
         dbc.Row([
-            dbc.Col(dbc.Form([
-                dbc.Input(id="csv-filename", placeholder="Enter CSV filename"),
-                dbc.Button("Download CSV", id="set-filename-btn", color="primary", className="mt-2"),
-                dcc.DatePickerRange(
-                    id='date-picker-range',
-                    start_date=datetime.today(),
-                    end_date=datetime.today(),
-                    stay_open_on_select=True,
-                    style={"margin-left": "15px",
-                           'padding': '10px'}
-                ),
-                dcc.ConfirmDialog(
-                    id='confirm-dialog',
-                    message=''
-                ),
-                dcc.Download(id="download-dataframe-csv")
-            ]), width=5),
+            dbc.Col(dcc.DatePickerRange(
+                id='graph-date-picker',
+                start_date=datetime.today(),
+                end_date=datetime.today() + timedelta(days=1),
+                stay_open_on_select=True,
+                style={"margin-left": "15px"}
+            )),
             dbc.Col(),
             dbc.Col(
                 html.Div(
@@ -40,7 +30,7 @@ def layout():
                         value=datums[0],
                         style={'width': '100%'},
                     ),
-                    style={'width': '90%', 'maxHeight': '100px', 'overflowY': 'scroll'},
+                    style={'width': '90%', 'maxHeight': '100px'},
                 ),
                 width=5
             )
@@ -68,17 +58,46 @@ def layout():
                     'alignItems': 'center',
                     'textAlign': 'center'
                 })
-            ])],style={
-                    'display': 'flex',
-                    'flexDirection': 'column',
-                    'alignItems': 'center',
-                    'justifyContent': 'center',
-                    'textAlign': 'center'  # Center align text in the parent div
-                })
-            )
+            ])], style={
+                'display': 'flex',
+                'flexDirection': 'column',
+                'alignItems': 'center',
+                'justifyContent': 'center',
+                'textAlign': 'center'  # Center align text in the parent div
+            }))
         ]),
-        EventSource(id='eventsource', url='/eventsource')
-
+        dbc.Row([
+            dbc.Col(dash_table.DataTable(
+                id='tide-table',
+                columns=[
+                    {'name': 'Time', 'id': 'time'},
+                    {'name': 'Tide Level', 'id': 'tide_level'},
+                    {'name': 'Predicted Tide Level', 'id': 'predicted_tide_level'}
+                ],
+                style_table={'overflowX': 'auto'},
+                style_cell={'textAlign': 'left'},
+            ), width=12)
+        ]),
+        dbc.Row([
+            dbc.Col(dbc.Form([
+                dbc.Row([
+                    dbc.Col(dbc.Input(id="csv-filename", placeholder="Enter CSV filename"), width=4),
+                    dbc.Col(dcc.DatePickerRange(
+                        id='date-picker-range',
+                        start_date=datetime.today(),
+                        end_date=datetime.today(),
+                        stay_open_on_select=True,
+                        style={'padding': '10px'}
+                    ), width=4),
+                    dbc.Col(dbc.Button("Download CSV", id="set-filename-btn", color="primary"), width=4)
+                ], align='center')
+            ]), width=12),
+            dbc.Col(dcc.ConfirmDialog(
+                id='confirm-dialog',
+                message=''
+            )),
+            dbc.Col(dcc.Download(id="download-dataframe-csv"))
+        ]),
     ])
-	
-    return layout
+
+
