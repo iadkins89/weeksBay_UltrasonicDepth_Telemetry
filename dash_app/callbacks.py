@@ -14,8 +14,8 @@ def register_callbacks(app):
         data = date_query(start_date,end_date)
 
         tide_predictions = predictions(start_date, end_date)
-        timestamps = [d['timestamp'] for d in data]
-        tide_level = [d['depth'] for d in data]
+        timestamps = [d.timestamp for d in data]
+        tide_level = [d.tide for d in data]
         pred_tide_levels = [prediction[1] for prediction in tide_predictions]
 
         return {
@@ -25,8 +25,6 @@ def register_callbacks(app):
                 mode='lines+markers',
                 name='Tide Level',
                 marker={'color': 'mediumturquoise'},
-                fill='tozeroy',  # This fills the area under the line
-                fillcolor='rgba(72, 209, 204, 0.2)'  # Optional: to control the fill color and its transparency
             ),
             go.Scatter(
                 x=[prediction[0] for prediction in tide_predictions],
@@ -34,15 +32,44 @@ def register_callbacks(app):
                 mode='lines+markers',
                 name='Predicted Tide Levels',
                 marker={'color': 'orange'},
-                line={'dash': 'dash', 'width': .01}
+                line={'width': 0.5}
             )
         ],
             'layout': go.Layout(
                 title='Weeks Bay Depth',
                 xaxis={'title': 'Time'},
-                yaxis={'title': 'Tide Level (ft)', 'range': [-1, 7]}
+                yaxis={'title': 'Tide Level (ft)', 'range': [-3, 6]},
+                legend=dict(
+                    x=0,  # Position the legend at the top-left corner
+                    y=1,
+                    traceorder='normal'
+                )
             )
         }
+
+    @app.callback(
+        Output('tide-table', 'data'),
+        [Input('graph-date-picker', 'start_date'),
+         Input('graph-date-picker', 'end_date'),
+         Input('table-dropdown', 'value'),
+         Input('tide-table', 'page_current'),
+         Input('tide-table', 'page_size')]
+    )
+    def update_table(start_date, end_date, datum, page_current, page_size):
+        data = date_query(start_date, end_date)
+        tide_predictions = predictions(start_date, end_date)
+
+        table_data = []
+        for d, pred in zip(data, tide_predictions):
+            table_data.append({
+                'time': d.timestamp,
+                'tide_level': d.tide,
+                'predicted_tide_level': pred[1]
+            })
+
+        start = page_current * page_size
+        end = start + page_size
+        return table_data[start:end]
 
     @app.callback(
         Output('confirm-dialog', 'displayed'),

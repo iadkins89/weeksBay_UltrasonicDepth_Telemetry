@@ -1,5 +1,4 @@
-from dash import dcc, html, register_page
-import dash_table
+from dash import dash_table, dcc, html, register_page
 import dash_bootstrap_components as dbc
 from datetime import datetime, timedelta
 
@@ -74,8 +73,11 @@ def layout():
                     {'name': 'Tide Level', 'id': 'tide_level'},
                     {'name': 'Predicted Tide Level', 'id': 'predicted_tide_level'}
                 ],
+                page_size=7,  # Set the number of rows per page
+                page_current=0,  # Start on the first page
                 style_table={'overflowX': 'auto'},
                 style_cell={'textAlign': 'left'},
+                page_action='custom'
             ), width=12)
         ]),
         dbc.Row([

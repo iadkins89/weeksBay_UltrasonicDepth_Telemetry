@@ -107,7 +107,7 @@ def predictions(start_time_str,end_time_str,interval_minutes=6):
         for amplitude, phase, speed in harmonic_constituents:
             # Calculate the contribution of each constituent
             tide_level += amplitude * math.cos(
-                speed * (i * interval_minutes / 60) * (math.pi / 180) + (math.radians(phase) / 60))
+                speed * (i * interval_minutes / 60) * (math.pi / 180) + math.radians(phase)) #/ 60))
 
         tide_level += 0.80 + tide_level
         predictions.append((current_time, tide_level))
