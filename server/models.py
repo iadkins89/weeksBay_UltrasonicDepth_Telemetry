@@ -1,6 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
 import math
-from sqlalchemy import distinct
+from sqlalchemy import desc
 from datetime import datetime, timedelta
 from server import db
 import pandas as pd
@@ -82,6 +81,9 @@ def date_query(start_date, end_date):
 
     result = db.session.query(SensorData).filter(SensorData.timestamp >= start_dt, SensorData.timestamp <= end_dt).all()
     return result
+
+def most_recent_query():
+    return db.session.query(SensorData).order_by(desc(SensorData.timestamp)).first()
 
 def predictions(start_time_str,end_time_str,interval_minutes=6):
     """

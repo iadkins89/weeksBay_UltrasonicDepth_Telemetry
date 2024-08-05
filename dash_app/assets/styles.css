@@ -1,3 +1,23 @@
 .custom-navbar {
     background-color: #fdefda;  /* Change this color to your preferred background color */
 }
+
+.DateRangePicker_picker {
+    background-color: #158cba !important;
+}
+
+.CalendarDay__selected {
+    background: #158cba !important;
+    border: 1px double #158cba!important;
+}
+
+.CalendarDay__selected_span {
+    background: rgba(21, 140, 186, 0.5) !important;
+    border: 1px double #158cba !important;
+}
+
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span {
+    background: #158cba !important;
+    border: 1px double #158cba !important;
+}

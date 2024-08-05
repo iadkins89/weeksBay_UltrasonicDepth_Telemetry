@@ -1,6 +1,7 @@
 from dash import dash_table, dcc, html, register_page
 import dash_bootstrap_components as dbc
 from datetime import datetime, timedelta
+from server.models import most_recent_query
 
 register_page(
     __name__,
@@ -10,6 +11,7 @@ register_page(
 
 def layout():
     datums = ["MLLW", "MLW", "MSL", "MTL", "MHW", "MHHW", "STND"]
+    most_recent_data = most_recent_query()
 
     return dbc.Container([
         dbc.Row([
@@ -35,14 +37,31 @@ def layout():
             )
         ], style={'paddingTop': '5px'}),
         dbc.Row([
-            dbc.Col(dcc.Graph(id='depth-graph'), width=8),
-            dbc.Col(html.Div([html.Div([
+            dbc.Col(dcc.Graph(id='depth-graph',config={
+            'modeBarButtonsToRemove': [
+                'zoom2d', 'pan2d', 'select2d', 'lasso2d',
+                'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d',
+                'hoverClosestCartesian', 'hoverCompareCartesian',
+                'toggleSpikelines'
+            ],
+            'displaylogo': False  # Optional: remove Plotly logo
+        }), width=8),
+            dbc.Col(html.Div([
                 html.H4("Most Recent Tidal Recording", style={
                     'marginBottom': '8px',
                     'textAlign': 'center',
                     'fontSize': '16px'
                 }),
-                html.Div(id='recent-tide-measurement', style={
+                html.Div([
+                    html.Div(f"{most_recent_data.tide} ft", style={
+                        'fontSize': '24px',
+                        'fontWeight': 'bold',
+                    }),
+                    html.Div(f"{most_recent_data.timestamp}", style={
+                        'fontSize': '14px',
+                        'marginTop': '8px'
+                    })
+                ], style={
                     'backgroundColor': 'white',
                     'color': '#34495E',
                     'height': '200px',
@@ -57,7 +76,7 @@ def layout():
                     'alignItems': 'center',
                     'textAlign': 'center'
                 })
-            ])], style={
+            ], style={
                 'display': 'flex',
                 'flexDirection': 'column',
                 'alignItems': 'center',

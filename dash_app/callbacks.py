@@ -1,7 +1,7 @@
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import plotly.graph_objs as go
-from server.models import date_query, save_data_to_csv, predictions
+from server.models import date_query, save_data_to_csv, predictions, most_recent_query
 
 def register_callbacks(app):
     @app.callback(
@@ -24,19 +24,19 @@ def register_callbacks(app):
                 y=tide_level,
                 mode='lines+markers',
                 name='Tide Level',
-                marker={'color': 'mediumturquoise'},
+                marker={'color': 'mediumturquoise', 'size': 3},
             ),
             go.Scatter(
                 x=[prediction[0] for prediction in tide_predictions],
                 y=pred_tide_levels,
                 mode='lines+markers',
                 name='Predicted Tide Levels',
-                marker={'color': 'orange'},
-                line={'width': 0.5}
+                marker={'color': 'orange', 'size': 3},
+                #line={'width': 0.5}
             )
         ],
             'layout': go.Layout(
-                title='Weeks Bay Depth',
+                title='Weeks Bay Tidal Observations',
                 xaxis={'title': 'Time'},
                 yaxis={'title': 'Tide Level (ft)', 'range': [-3, 6]},
                 legend=dict(
@@ -46,7 +46,6 @@ def register_callbacks(app):
                 )
             )
         }
-
     @app.callback(
         Output('tide-table', 'data'),
         [Input('graph-date-picker', 'start_date'),
