@@ -48,6 +48,7 @@ def register_callbacks(app):
         }
     @app.callback(
         Output('tide-table', 'data'),
+        Output('tide-table', 'page_count'),
         [Input('graph-date-picker', 'start_date'),
          Input('graph-date-picker', 'end_date'),
          Input('table-dropdown', 'value'),
@@ -68,7 +69,8 @@ def register_callbacks(app):
 
         start = page_current * page_size
         end = start + page_size
-        return table_data[start:end]
+        page_count = len(table_data) // page_size + (len(table_data) % page_size > 0)
+        return table_data[start:end], page_count
 
     @app.callback(
         Output('confirm-dialog', 'displayed'),
