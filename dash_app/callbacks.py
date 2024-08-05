@@ -77,8 +77,8 @@ def register_callbacks(app):
         Output('confirm-dialog', 'message'),
         Output('download-dataframe-csv', 'data'),
         [Input('set-filename-btn', 'n_clicks')],
-        [State('date-picker-range', 'start_date'),
-         State('date-picker-range', 'end_date'),
+        [State('graph-date-picker', 'start_date'),
+         State('graph-date-picker', 'end_date'),
          State('csv-filename', 'value'),
          State('table-dropdown', 'value')]
     )

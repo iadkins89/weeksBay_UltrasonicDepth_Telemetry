@@ -103,13 +103,6 @@ def layout():
             dbc.Col(dbc.Form([
                 dbc.Row([
                     dbc.Col(dbc.Input(id="csv-filename", placeholder="Enter CSV filename"), width=4),
-                    dbc.Col(dcc.DatePickerRange(
-                        id='date-picker-range',
-                        start_date=datetime.today(),
-                        end_date=datetime.today(),
-                        stay_open_on_select=True,
-                        style={'padding': '10px'}
-                    ), width=4),
                     dbc.Col(dbc.Button("Download CSV", id="set-filename-btn", color="primary"), width=4)
                 ], align='center')
             ]), width=12),
