@@ -53,7 +53,7 @@ def layout():
                     'fontSize': '16px'
                 }),
                 html.Div([
-                    html.Div(f"{most_recent_data.tide} ft" if most_recent_data and most_recent_data.tide else "",
+                    html.Div(f"{round(most_recent_data.tide, 2)} ft" if most_recent_data and most_recent_data.tide else "",
                     style={
                         'fontSize': '24px',
                         'fontWeight': 'bold',
