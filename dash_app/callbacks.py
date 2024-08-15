@@ -1,7 +1,7 @@
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import plotly.graph_objs as go
-from server.models import date_query, save_data_to_csv, predictions, most_recent_query
+from server.models import date_query, save_data_to_csv, most_recent_query
 
 def register_callbacks(app):
     @app.callback(
@@ -13,10 +13,8 @@ def register_callbacks(app):
     def update_depth_graph(start_date, end_date, datum):
         data = date_query(start_date,end_date)
 
-        tide_predictions = predictions(start_date, end_date)
         timestamps = [d.timestamp for d in data]
         tide_level = [d.tide for d in data]
-        pred_tide_levels = [prediction[1] for prediction in tide_predictions]
 
         return {
             'data': [go.Scatter(
@@ -25,14 +23,6 @@ def register_callbacks(app):
                 mode='lines+markers',
                 name='Tide Level',
                 marker={'color': 'mediumturquoise', 'size': 3},
-            ),
-            go.Scatter(
-                x=[prediction[0] for prediction in tide_predictions],
-                y=pred_tide_levels,
-                mode='lines+markers',
-                name='Predicted Tide Levels',
-                marker={'color': 'orange', 'size': 3},
-                #line={'width': 0.5}
             )
         ],
             'layout': go.Layout(
@@ -57,14 +47,12 @@ def register_callbacks(app):
     )
     def update_table(start_date, end_date, datum, page_current, page_size):
         data = date_query(start_date, end_date)
-        tide_predictions = predictions(start_date, end_date)
 
         table_data = []
-        for d, pred in zip(data, tide_predictions):
+        for d in zip(data):
             table_data.append({
                 'time': d.timestamp,
-                'tide_level': d.tide,
-                'predicted_tide_level': pred[1]
+                'tide_level': d.tide
             })
 
         start = page_current * page_size

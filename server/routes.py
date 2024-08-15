@@ -2,8 +2,6 @@ from flask import request, jsonify, Response
 from datetime import datetime, timedelta
 from .models import SensorData
 from .database import db
-import json
-import time
 
 def setup_routes(server):
     @server.route('/receive_data', methods=['POST'])

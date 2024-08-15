@@ -20,6 +20,7 @@ def layout():
                 start_date=datetime.today(),
                 end_date=datetime.today() + timedelta(days=1),
                 stay_open_on_select=True,
+                minimum_nights=0,
                 style={"margin-left": "15px"}
             )),
             dbc.Col(),
