@@ -49,7 +49,7 @@ def register_callbacks(app):
         data = date_query(start_date, end_date)
 
         table_data = []
-        for d in zip(data):
+        for d in data:
             table_data.append({
                 'time': d.timestamp,
                 'tide_level': d.tide
