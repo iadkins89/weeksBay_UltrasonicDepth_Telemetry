@@ -28,7 +28,7 @@ def register_callbacks(app):
             'layout': go.Layout(
                 title='Weeks Bay Tidal Observations',
                 xaxis={'title': 'Time'},
-                yaxis={'title': 'Tide Level (ft)', 'range': [-3, 6]},
+                yaxis={'title': 'Tide Level (ft)', 'range': [0, 10]},
                 legend=dict(
                     x=0,  # Position the legend at the top-left corner
                     y=1,
