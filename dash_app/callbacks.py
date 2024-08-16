@@ -22,7 +22,9 @@ def register_callbacks(app):
                 y=tide_level,
                 mode='lines+markers',
                 name='Tide Level',
-                marker={'color': 'mediumturquoise', 'size': 3},
+                marker={'color': 'mediumturquoise', 'size': 5},
+                fill='tozeroy',  # Fill under the curve
+                fillcolor='rgba(0, 204, 204, 0.2)'  # Color and opacity of the fill
             )
         ],
             'layout': go.Layout(
