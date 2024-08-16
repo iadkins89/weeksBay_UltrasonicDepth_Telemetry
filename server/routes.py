@@ -9,8 +9,7 @@ def setup_routes(server):
         sensor_data = request.json
         name = sensor_data["name"]
         tide = sensor_data['decoded']['payload']['distance']
-        unix_time_data = sensor_data['decoded']['payload']['timestamp']
-        timestamp = datetime.utcfromtimestamp(unix_time_data).strftime('%Y-%m-%dT%H:%M:%S')
+        timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
         new_data = SensorData(
             name = name,

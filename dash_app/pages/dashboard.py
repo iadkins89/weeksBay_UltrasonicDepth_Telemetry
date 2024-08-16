@@ -92,8 +92,7 @@ def layout():
                 id='tide-table',
                 columns=[
                     {'name': 'Time', 'id': 'time'},
-                    {'name': 'Tide Level', 'id': 'tide_level'},
-                    {'name': 'Predicted Tide Level', 'id': 'predicted_tide_level'}
+                    {'name': 'Tide Level', 'id': 'tide_level'}
                 ],
                 page_size=7,  # Set the number of rows per page
                 page_current=0,  # Start on the first page
