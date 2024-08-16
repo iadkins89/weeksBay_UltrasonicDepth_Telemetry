@@ -18,7 +18,7 @@ def layout():
             dbc.Col(dcc.DatePickerRange(
                 id='graph-date-picker',
                 start_date=datetime.today(),
-                end_date=datetime.today() + timedelta(days=1),
+                end_date=datetime.today(),
                 stay_open_on_select=True,
                 minimum_nights=0,
                 style={"margin-left": "15px"}
