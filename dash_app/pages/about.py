@@ -1,150 +1,153 @@
-from dash import dcc, html, register_page
+from dash import html, register_page
 import dash_bootstrap_components as dbc
 
 register_page(
-	__name__,
-	top_nav=True,
-	path='/about'
+    __name__,
+    top_nav=True,
+    path='/about'
 )
 
 def layout():
-	layout = dbc.Container(
-	[
-		dbc.Row(
-			dbc.Col(
-				html.H1("About Us", style={"margin-top": "35px", "margin-left": "190px", "margin-right": "190px"} ),
-			width=12
-			)
-	),
-		dbc.Row(
-			dbc.Col(
-				html.P(
-					"Welcome to the Coastal Telemetry Project at the University of South Alabama. "
-					"Our mission is to innovate and implement cutting-edge telemetry devices designed to monitor and protect our coastal environments. "
-					"Utilizing the advanced capabilities of LoRaWAN (Long Range Wide Area Network) technology, our devices provide real-time data collection and transmission over vast distances, making them ideal for remote and hard-to-reach coastal areas.",
-				className="lead",
-				style={"margin-left": "190px", "margin-right": "190px"} 
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.H2("Our Mission", style={"margin-left": "190px", "margin-right": "190px"} ),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.P(
-	"Our primary goal is to enhance the understanding and preservation of coastal ecosystems through accurate and reliable telemetry. By deploying these advanced devices, we aim to:",
-	className="lead",
-	style={"margin-left": "190px", "margin-right": "190px"} 
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.Ul(
-	[
-	html.Li("Monitor environmental parameters such as water quality, temperature, and salinity.", style={"margin-left": "190px", "margin-right": "190px"} ),
-	html.Li("Track the movement and behavior of marine and coastal wildlife.", style={"margin-left": "190px", "margin-right": "190px"} ),
-	html.Li("Support scientific research and conservation efforts with high-quality data.", style={"margin-left": "190px", "margin-right": "190px"} ),
-	html.Li("Provide valuable information to stakeholders, including researchers, environmental agencies, and the general public.", style={"margin-left": "190px", "margin-right": "190px"} ),
-	]
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.H2("Our Technology", style={"margin-left": "190px", "margin-right": "190px"} ),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.P(
-	"Our telemetry devices leverage LoRaWAN technology to offer:",
-	className="lead",
-	style={"margin-left": "190px", "margin-right": "190px"} 
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.Ul(
-	[
-	html.Li("Long-Range Communication: Capable of transmitting data over several kilometers, ensuring coverage in remote areas.", style={"margin-left": "190px", "margin-right": "190px"} ),
-	html.Li("Low Power Consumption: Designed to operate for extended periods without the need for frequent battery replacements.", style={"margin-left": "190px", "margin-right": "190px"} ),
-	html.Li("Scalability: Easily expandable networks to accommodate additional sensors and devices.", style={"margin-left": "190px", "margin-right": "190px"} ),
-	]
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.H2("Get Involved", style={"margin-left": "190px", "margin-right": "190px"} ),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.P(
-	"We invite students, researchers, and anyone passionate about environmental conservation to get involved with our project. Whether you're interested in field deployment, data analysis, or technological development, there's a place for you in our team.",
-	className="lead",
-	style={"margin-left": "190px", "margin-right": "190px"} 
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.H2("Contact Us", style={"margin-left": "190px", "margin-right": "190px"} ),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.P(
-	"For more information about our project, collaborations, or any inquiries, please feel free to reach out to us at:",
-	className="lead",
-	style={"margin-left": "190px", "margin-right": "190px"} 
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.P(
-	[
-	"Email: ",
-	html.A("iea2021@jagmail.southalabama.edu", href="mailto:iea2021@jagmail.southalabama.edu"),
-	],
-	className="lead",
-	style={"margin-left": "190px", "margin-right": "190px"} 
-	),
-	width=12
-	)
-	),
-	dbc.Row(
-	dbc.Col(
-	html.P(
-	[
-	"You can also explore our latest developments and access our open-source telemetry dashboard on GitHub: ",
-	html.A("Telemetry Dashboard GitHub Repository", href="https://github.com/iadkins89/telemetry_dashboard"),
-	],
-	className="lead",
-	style={"margin-left": "190px", "margin-right": "190px"} 
-	),
-	width=12
-	)
-	),
-	],
-	fluid=True
-	)
+    layout = dbc.Container(
+        [
+            dbc.Row(
+                dbc.Col(
+                    html.H1("About Us", style={"margin-top": "35px", "margin-left": "190px", "margin-right": "190px"}),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.P(
+                        "Welcome to the Weeks Bay Ultrasonic Depth Telemetry Project, a collaborative effort based in Fairhope, Alabama, "
+                        "aimed at advancing our understanding of tidal dynamics in the Weeks Bay Reserve. This project is part of the ongoing "
+                        "commitment by the University of South Alabama to leverage innovative technology for environmental monitoring and conservation. "
+                        "Utilizing an ultrasonic sensor, our system measures real-time water (tide) levels and transmits the data via LoRaWAN (Long Range "
+                        "Wide Area Network) technology, providing critical insights into the tidal patterns of this vital coastal region.",
+                        className="lead",
+                        style={"margin-left": "190px", "margin-right": "190px"}
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.H2("Our Mission", style={"margin-left": "190px", "margin-right": "190px"}),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.P(
+                        "Our mission is to contribute to the sustainability and preservation of Weeks Bay by providing accurate, real-time data on tidal movements. "
+                        "By deploying state-of-the-art telemetry systems, we aim to:",
+                        className="lead",
+                        style={"margin-left": "190px", "margin-right": "190px"}
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.Ul(
+                        [
+                            html.Li("Continuously monitor water levels to understand tidal behaviors and their impact on the ecosystem.", style={"margin-left": "190px", "margin-right": "190px"}),
+                            html.Li("Support conservation efforts by offering reliable data to researchers and environmental agencies.", style={"margin-left": "190px", "margin-right": "190px"}),
+                            html.Li("Enhance public awareness and education about the importance of coastal ecosystems through accessible and transparent data sharing.", style={"margin-left": "190px", "margin-right": "190px"}),
+                        ]
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.H2("Our Technology", style={"margin-left": "190px", "margin-right": "190px"}),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.P(
+                        "Our project employs the following advanced technologies to ensure precise and reliable data collection:",
+                        className="lead",
+                        style={"margin-left": "190px", "margin-right": "190px"}
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.Ul(
+                        [
+                            html.Li("Ultrasonic Sensor: Accurately measures the distance from the sensor to the water surface, allowing us to monitor tide levels with high precision.", style={"margin-left": "190px", "margin-right": "190px"}),
+                            html.Li("LoRaWAN Communication: Enables long-range, low-power transmission of data, ensuring that information is relayed in real-time even from remote locations within the reserve.", style={"margin-left": "190px", "margin-right": "190px"}),
+                            html.Li("Real-Time Data: Provides instant access to water level information, facilitating timely decision-making for environmental management.", style={"margin-left": "190px", "margin-right": "190px"}),
+                        ]
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.H2("Get Involved", style={"margin-left": "190px", "margin-right": "190px"}),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.P(
+                        "We welcome students, researchers, and community members who are passionate about coastal conservation and technology to join our project. "
+                        "Whether your interest lies in fieldwork, data analysis, or technological innovation, there are numerous opportunities to contribute to our mission.",
+                        className="lead",
+                        style={"margin-left": "190px", "margin-right": "190px"}
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.H2("Contact Us", style={"margin-left": "190px", "margin-right": "190px"}),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.P(
+                        "For more information about our project, collaborations, or any inquiries, please feel free to reach out to us at:",
+                        className="lead",
+                        style={"margin-left": "190px", "margin-right": "190px"}
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.P(
+                        [
+                            "Email: ",
+                            html.A("iea2021@jagmail.southalabama.edu", href="mailto:iea2021@jagmail.southalabama.edu"),
+                        ],
+                        className="lead",
+                        style={"margin-left": "190px", "margin-right": "190px"}
+                    ),
+                    width=12
+                )
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.P(
+                        [
+                            "You can also stay updated with our progress and explore our open-source code on GitHub: ",
+                            html.A("Weeks Bay Ultrasonic Depth Telemetry GitHub Repository", href="https://github.com/iadkins89/weeksBay_UltrasonicDepth_Telemetry"),
+                        ],
+                        className="lead",
+                        style={"margin-left": "190px", "margin-right": "190px"}
+                    ),
+                    width=12
+                )
+            ),
+        ],
+        fluid=True
+    )
 
-	return layout
+    return layout
