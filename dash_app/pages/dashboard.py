@@ -59,11 +59,18 @@ def layout():
                         'fontSize': '24px',
                         'fontWeight': 'bold',
                     }),
-                    html.Div(f"{most_recent_data.timestamp}" if most_recent_data and most_recent_data.timestamp else "",
+                    html.Div(f"{most_recent_data.timestamp.split('T')[0]}" if most_recent_data and most_recent_data.timestamp else "",
                     style={
                         'fontSize': '14px',
                         'marginTop': '8px'
-                    })
+                    }),
+                    html.Div(
+                        f"{most_recent_data.timestamp.split('T')[1]}" if most_recent_data and most_recent_data.timestamp else "",
+                        style={
+                            'fontSize': '14px',
+                            'marginTop': '4px'
+                        }
+                    )
                 ], style={
                     'backgroundColor': 'white',
                     'color': '#34495E',
