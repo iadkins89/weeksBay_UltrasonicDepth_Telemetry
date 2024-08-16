@@ -1,5 +1,6 @@
-from flask import request, jsonify, Response
-from datetime import datetime, timedelta
+from flask import request, jsonify
+from datetime import datetime
+import pytz
 from .models import SensorData
 from .database import db
 
@@ -9,7 +10,10 @@ def setup_routes(server):
         sensor_data = request.json
         name = sensor_data["name"]
         tide = sensor_data['decoded']['payload']['distance']
-        timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+
+        # Set timezone to Central Time
+        central_tz = pytz.timezone('America/Chicago')
+        timestamp = datetime.now(central_tz).strftime('%Y-%m-%dT%H:%M:%S')
 
         new_data = SensorData(
             name = name,
