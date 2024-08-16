@@ -11,7 +11,16 @@ register_page(
 
 def layout():
     datums = ["MLLW", "MLW", "MSL", "MTL", "MHW", "MHHW", "STND"]
+
     most_recent_data = most_recent_query()
+
+    # Format the date and time for display
+    if most_recent_data and most_recent_data.timestamp:
+        timestamp_date = most_recent_data.timestamp.strftime('%Y-%m-%d')
+        timestamp_time = most_recent_data.timestamp.strftime('%H:%M:%S')
+    else:
+        timestamp_date = ""
+        timestamp_time = ""
 
     return dbc.Container([
         dbc.Row([
@@ -59,13 +68,12 @@ def layout():
                         'fontSize': '24px',
                         'fontWeight': 'bold',
                     }),
-                    html.Div(f"{most_recent_data.timestamp.split('T')[0]}" if most_recent_data and most_recent_data.timestamp else "",
+                    html.Div(timestamp_date,
                     style={
                         'fontSize': '14px',
                         'marginTop': '8px'
                     }),
-                    html.Div(
-                        f"{most_recent_data.timestamp.split('T')[1]}" if most_recent_data and most_recent_data.timestamp else "",
+                    html.Div(timestamp_time,
                         style={
                             'fontSize': '14px',
                             'marginTop': '4px'
