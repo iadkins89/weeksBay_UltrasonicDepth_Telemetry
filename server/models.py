@@ -34,9 +34,16 @@ def save_data_to_csv(data, datum_name, filename='output.csv'):
     return csv_data
 
 def date_query(start_date, end_date):
-    # Convert strings to datetime objects including microseconds
-    start_dt = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S.%f').replace(hour=0, minute=0, second=0)
-    end_dt = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S.%f').replace(hour=23, minute=59, second=59)
+    # Check if start_date and end_date have the time component
+    if 'T' in start_date:
+        start_dt = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%S.%f').replace(hour=0, minute=0, second=0)
+    else:
+        start_dt = datetime.strptime(start_date, '%Y-%m-%d')
+
+    if 'T' in end_date:
+        end_dt = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%S.%f').replace(hour=23, minute=59, second=59)
+    else:
+        end_dt = datetime.strptime(end_date, '%Y-%m-%d').replace(hour=23, minute=59, second=59)
 
     result = db.session.query(SensorData).filter(SensorData.timestamp >= start_dt, SensorData.timestamp <= end_dt).all()
     return result
