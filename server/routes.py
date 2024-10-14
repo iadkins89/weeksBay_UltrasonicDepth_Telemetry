@@ -10,10 +10,11 @@ def setup_routes(server):
         sensor_data = request.json
         name = sensor_data["name"]
         tide = sensor_data['decoded']['payload']['distance']
+        unix_timestamp = sensor_data['decoded']['payload']['timestamp']
 
         # Set timezone to Central Time
         central_tz = pytz.timezone('America/Chicago')
-        timestamp = datetime.now(central_tz).strftime('%Y-%m-%dT%H:%M:%S')
+        timestamp = datetime.fromtimestamp(unix_timestamp, central_tz).strftime('%Y-%m-%dT%H:%M:%S')
 
         new_data = SensorData(
             name = name,
