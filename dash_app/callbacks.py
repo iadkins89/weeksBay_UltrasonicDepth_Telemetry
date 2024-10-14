@@ -23,14 +23,12 @@ def register_callbacks(app):
                 mode='lines+markers',
                 name='Tide Level',
                 marker={'color': 'mediumturquoise', 'size': 5},
-                fill='tozeroy',  # Fill under the curve
-                fillcolor='rgba(0, 204, 204, 0.2)'  # Color and opacity of the fill
             )
         ],
             'layout': go.Layout(
                 title='Weeks Bay Tidal Observations',
                 xaxis={'title': 'Time'},
-                yaxis={'title': 'Tide Level (ft)', 'range': [0, 10]},
+                yaxis={'title': 'Tide Level (m)', 'range': [0, 10]},
                 legend=dict(
                     x=0,  # Position the legend at the top-left corner
                     y=1,
