@@ -2,6 +2,7 @@ from dash import dash_table, dcc, html, register_page
 import dash_bootstrap_components as dbc
 from datetime import datetime, timedelta
 from server.models import most_recent_query
+import dash_daq as daq
 
 register_page(
     __name__,
@@ -81,7 +82,7 @@ def layout():
                             'marginTop': '4px'
                         }
                     ),
-                    dcc.Gauge(
+                    daq.Gauge(
                         id='battery-gauge',
                         min=0,
                         max=100,
