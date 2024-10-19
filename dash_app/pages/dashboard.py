@@ -40,7 +40,7 @@ def layout():
                 html.Div(
                     dcc.Dropdown(
                         id='table-dropdown',
-                        options=[{'label': d, 'value': d} for d in datums],
+                        options=datums,
                         value=datums[0],
                         style={'width': '100%'},
                     ),
@@ -50,8 +50,17 @@ def layout():
             )
         ], style={'paddingTop': '5px'}),
 
-        # Row for the Most Recent Tidal Recording
         dbc.Row([
+            dbc.Col(dcc.Graph(id='depth-graph', config={
+                'modeBarButtonsToRemove': [
+                    'zoom2d', 'pan2d', 'select2d', 'lasso2d',
+                    'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d',
+                    'hoverClosestCartesian', 'hoverCompareCartesian',
+                    'toggleSpikelines'
+                ],
+                'displaylogo': False
+            }), width=8),
+
             dbc.Col(html.Div([
                 html.H4("Most Recent Tidal Recording", style={
                     'marginBottom': '8px',
@@ -90,33 +99,27 @@ def layout():
                     'justifyContent': 'center',
                     'alignItems': 'center',
                     'textAlign': 'center'
-                })
+                }),
+
+                # Add the gauge below the most recent tidal recording
+                daq.Gauge(
+                    id='battery-gauge',
+                    min=0,
+                    max=100,
+                    value=battery_level,  # Replace with actual data
+                    label="Battery Level",
+                    color={"gradient": True, "ranges": {"green": [50, 100], "yellow": [20, 50], "red": [0, 20]}},
+                    style={'marginTop': '20px'}
+                )
             ], style={
                 'display': 'flex',
                 'flexDirection': 'column',
                 'alignItems': 'center',
                 'justifyContent': 'center',
                 'textAlign': 'center'
-            })),
+            }))
         ]),
 
-        # New row for the battery level gauge
-        dbc.Row([
-            dbc.Col(daq.Gauge(
-                id='battery-gauge',
-                min=0,
-                max=100,
-                value=battery_level,  # Replace this with actual battery level data
-                label="Battery Level",
-                color={"gradient": True, "ranges": {"green": [50, 100], "yellow": [20, 50], "red": [0, 20]}},
-                style={
-                    'fontSize': '16px',
-                    'fontWeight': 'bold',
-                }
-            ), width=6)
-        ], justify='center'),
-
-        # Other existing components such as table, download button, etc.
         dbc.Row([
             dbc.Col(dash_table.DataTable(
                 id='tide-table',
