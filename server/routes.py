@@ -11,6 +11,8 @@ def setup_routes(server):
         name = sensor_data["name"]
         tide = sensor_data['decoded']['payload']['distance']
         unix_timestamp = sensor_data['decoded']['payload']['timestamp']
+        battery = sensor_data['decoded']['payload']['battery']
+
 
         # Set timezone to Central Time
         #central_tz = pytz.timezone('America/Chicago')
@@ -26,6 +28,7 @@ def setup_routes(server):
             name = name,
             timestamp=timestamp,
             tide=tide,
+            battery=battery,
         )
         db.session.add(new_data)
         db.session.commit()

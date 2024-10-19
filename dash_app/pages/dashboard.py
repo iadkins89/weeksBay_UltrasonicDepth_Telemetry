@@ -22,6 +22,8 @@ def layout():
         timestamp_date = ""
         timestamp_time = ""
 
+    battery_level = most_recent_data.battery if most_recent_data and most_recent_data.battery else 0
+
     return dbc.Container([
         dbc.Row([
             dbc.Col(dcc.DatePickerRange(
@@ -78,6 +80,18 @@ def layout():
                             'fontSize': '14px',
                             'marginTop': '4px'
                         }
+                    ),
+                    dcc.Gauge(
+                        id='battery-gauge',
+                        min=0,
+                        max=100,
+                        value=battery_level,
+                        label="Battery Level",
+                        style={
+                            'fontSize': '16px',
+                            'fontWeight': 'bold',
+                        },
+                        color={"gradient": True, "ranges": {"green": [50, 100], "yellow": [20, 50], "red": [0, 20]}}
                     )
                 ], style={
                     'backgroundColor': 'white',

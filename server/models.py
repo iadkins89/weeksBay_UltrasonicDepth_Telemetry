@@ -12,6 +12,7 @@ class SensorData(db.Model):
     name = db.Column(db.String, nullable=True)
     timestamp = db.Column(db.DateTime, index=True, nullable=False)
     tide = db.Column(db.Float, nullable=False)
+    battery = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
         return f"<SensorData {self.name} {self.timestamp} {self.tide}>"
