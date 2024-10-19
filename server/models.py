@@ -6,7 +6,7 @@ import pandas as pd
 from dateutil.parser import parse as parse_date
 
 class SensorData(db.Model):
-    __tablename__ = 'tide_table'
+    __tablename__ = 'lidar_tide_table'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=True)
