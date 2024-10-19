@@ -40,7 +40,7 @@ def layout():
                 html.Div(
                     dcc.Dropdown(
                         id='table-dropdown',
-                        options=datums,
+                        options=[{'label': d, 'value': d} for d in datums],
                         value=datums[0],
                         style={'width': '100%'},
                     ),
@@ -49,16 +49,9 @@ def layout():
                 width=5
             )
         ], style={'paddingTop': '5px'}),
+
+        # Row for the Most Recent Tidal Recording
         dbc.Row([
-            dbc.Col(dcc.Graph(id='depth-graph',config={
-            'modeBarButtonsToRemove': [
-                'zoom2d', 'pan2d', 'select2d', 'lasso2d',
-                'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d',
-                'hoverClosestCartesian', 'hoverCompareCartesian',
-                'toggleSpikelines'
-            ],
-            'displaylogo': False  # Optional: remove Plotly logo
-        }), width=8),
             dbc.Col(html.Div([
                 html.H4("Most Recent Tidal Recording", style={
                     'marginBottom': '8px',
@@ -66,34 +59,23 @@ def layout():
                     'fontSize': '16px'
                 }),
                 html.Div([
-                    html.Div(f"{round(most_recent_data.tide, 2)} ft" if most_recent_data and most_recent_data.tide else "",
-                    style={
-                        'fontSize': '24px',
-                        'fontWeight': 'bold',
-                    }),
-                    html.Div(timestamp_date,
-                    style={
-                        'fontSize': '14px',
-                        'marginTop': '8px'
-                    }),
-                    html.Div(timestamp_time,
+                    html.Div(
+                        f"{round(most_recent_data.tide, 2)} ft" if most_recent_data and most_recent_data.tide else "",
                         style={
-                            'fontSize': '14px',
-                            'marginTop': '4px'
-                        }
-                    ),
-                    daq.Gauge(
-                        id='battery-gauge',
-                        min=0,
-                        max=100,
-                        value=battery_level,
-                        label="Battery Level",
-                        style={
-                            'fontSize': '16px',
+                            'fontSize': '24px',
                             'fontWeight': 'bold',
-                        },
-                        color={"gradient": True, "ranges": {"green": [50, 100], "yellow": [20, 50], "red": [0, 20]}}
-                    )
+                        }),
+                    html.Div(timestamp_date,
+                             style={
+                                 'fontSize': '14px',
+                                 'marginTop': '8px'
+                             }),
+                    html.Div(timestamp_time,
+                             style={
+                                 'fontSize': '14px',
+                                 'marginTop': '4px'
+                             }
+                             )
                 ], style={
                     'backgroundColor': 'white',
                     'color': '#34495E',
@@ -114,9 +96,27 @@ def layout():
                 'flexDirection': 'column',
                 'alignItems': 'center',
                 'justifyContent': 'center',
-                'textAlign': 'center'  # Center align text in the parent div
-            }))
+                'textAlign': 'center'
+            })),
         ]),
+
+        # New row for the battery level gauge
+        dbc.Row([
+            dbc.Col(daq.Gauge(
+                id='battery-gauge',
+                min=0,
+                max=100,
+                value=battery_level,  # Replace this with actual battery level data
+                label="Battery Level",
+                color={"gradient": True, "ranges": {"green": [50, 100], "yellow": [20, 50], "red": [0, 20]}},
+                style={
+                    'fontSize': '16px',
+                    'fontWeight': 'bold',
+                }
+            ), width=6)
+        ], justify='center'),
+
+        # Other existing components such as table, download button, etc.
         dbc.Row([
             dbc.Col(dash_table.DataTable(
                 id='tide-table',
@@ -124,13 +124,14 @@ def layout():
                     {'name': 'Time', 'id': 'time'},
                     {'name': 'Tide Level (ft)', 'id': 'tide_level'}
                 ],
-                page_size=7,  # Set the number of rows per page
-                page_current=0,  # Start on the first page
+                page_size=7,
+                page_current=0,
                 style_table={'overflowX': 'auto'},
                 style_cell={'textAlign': 'left'},
                 page_action='custom'
             ), width=12)
         ]),
+
         dbc.Row([
             dbc.Col(dbc.Form([
                 dbc.Row([
