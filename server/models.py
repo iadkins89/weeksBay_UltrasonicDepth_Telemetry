@@ -30,7 +30,7 @@ def save_data_to_csv(data, datum_name, filename='output.csv'):
 
     # Add the sensor name at the beginning
     sensor_name_line = f"Sensor Name: {sensor_name}\n"
-    datum_name_line = f"Sensor Name: {datum_name}\n"
+    datum_name_line = f"Datum: {datum_name}\n"
     csv_data = sensor_name_line + datum_name_line + csv_data
 
     return csv_data

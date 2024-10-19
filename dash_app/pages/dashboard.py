@@ -11,7 +11,7 @@ register_page(
 )
 
 def layout():
-    datums = ["MLLW", "MLW", "MSL", "MTL", "MHW", "MHHW", "STND"]
+    datums = ["NAVD88", "MLLW", "MLW", "MSL", "MTL", "MHW", "MHHW", "STND"]
 
     most_recent_data = most_recent_query()
 
@@ -69,7 +69,7 @@ def layout():
                 }),
                 html.Div([
                     html.Div(
-                        f"{round(most_recent_data.tide, 2)} ft" if most_recent_data and most_recent_data.tide else "",
+                        f"{round(most_recent_data.tide, 2)} m" if most_recent_data and most_recent_data.tide else "",
                         style={
                             'fontSize': '24px',
                             'fontWeight': 'bold',
@@ -104,6 +104,7 @@ def layout():
                 # Add the gauge below the most recent tidal recording
                 daq.Gauge(
                     id='battery-gauge',
+                    showCurrentValue=True,
                     min=0,
                     max=100,
                     value=battery_level,  # Replace with actual data
@@ -125,7 +126,7 @@ def layout():
                 id='tide-table',
                 columns=[
                     {'name': 'Time', 'id': 'time'},
-                    {'name': 'Tide Level (ft)', 'id': 'tide_level'}
+                    {'name': 'Tide Level (m)', 'id': 'tide_level'}
                 ],
                 page_size=7,
                 page_current=0,
@@ -148,6 +149,7 @@ def layout():
             )),
             dbc.Col(dcc.Download(id="download-dataframe-csv"))
         ]),
+        dbc.Row()
     ])
 
 
