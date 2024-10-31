@@ -25,7 +25,7 @@ def setup_routes(server):
         timestamp = local_dt.strftime('%Y-%m-%dT%H:%M:%S')
 
         #NAVDD88 adjustment
-        tide = round(1.19 - tide, 3)
+        tide = round(1.291 - tide, 3)
 
         new_data = SensorData(
             name = name,

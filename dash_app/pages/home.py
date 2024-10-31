@@ -15,8 +15,8 @@ map_graph = dcc.Graph(
     figure={
         'data': [
             go.Scattermapbox(
-                lat=[30.4167],
-                lon=[-87.825],
+                lat=[30.54294824],
+                lon=[-87.90090477],
                 mode='markers',
                 marker=dict(size=14, color='red'),
                 text=['Sensor Location']
