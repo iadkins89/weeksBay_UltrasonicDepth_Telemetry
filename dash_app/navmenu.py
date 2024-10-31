@@ -7,8 +7,8 @@ def create_menu():
         dbc.Container(
             [
                 dbc.Row([
-                    dbc.Col(html.Img(src='/assets/weeks-bay.png', style={'height': '100px'}), width='auto'),
-                    dbc.Col(html.H1("Weeks Bay Tide Observations", className="text-left", style={'color': '#154360'}), width='auto')
+                    dbc.Col(html.Img(src='/assets/usa_blue.png', style={'height': '100px'}), width='auto'),
+                    dbc.Col(html.H1("Fly Creek Tidal Observations", className="text-left", style={'color': '#154360'}), width='auto')
                 ], align='center'),
                 dbc.Nav(
                     [

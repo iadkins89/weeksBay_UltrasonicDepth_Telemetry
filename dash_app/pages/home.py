@@ -23,12 +23,6 @@ map_graph = dcc.Graph(
             )
         ],
         'layout': go.Layout(
-            title={
-                'text': 'Tide Gauge Location',
-                'font': {
-                    'size': 24  
-                }
-            },
             autosize=True,
             hovermode='closest',
             mapbox=dict(
@@ -41,30 +35,37 @@ map_graph = dcc.Graph(
                 pitch=0,
                 zoom=8,
                 style='outdoors'
-            )
+            ),
+            margin=dict(l=0, r=0, t=0, b=0),  # Remove padding around the map
         )
     },
-    style={'height': '700px'}  
+    style={'height': '75vh', 'width': '100%'},
+    config={
+        'displayModeBar': False  # Hide the mode bar completely
+    }
 )
 
 def layout():
     layout = dbc.Container(
         [
+            dcc.Location(id='url', refresh=True),
+            dcc.Store(id='click-store'),  # Store to reset clickData
             dbc.Row(
                 dbc.Col(
                     map_graph,
-                    width=0
+                    width=12
                 ),
-            style={"margin-left": "100px", "margin-right": "100px", "margin-bottom": "0px"} 
+            style={"margin": "0"}
             ),
             dbc.Row(
                 dbc.Col(
                     html.P(
-                        "This map shows the location of activately deployed sensors in our network. "
-                        "You can use this map to visualize the sensor's position and explore the surrounding area.",
-                        "Collected sensor measurements can be viewed at the Dashboard tab of this webpage.",
+                        "This map shows the location of actively deployed sensors in our network. "
+                        "You can use this map to visualize the sensor's position and explore the surrounding area."
+                        "Collected sensor measurements can be viewed by clicking a sensor marker on the map"
+                        "or by clicking Dashboard tab of this webpage.",
                         className="lead",
-                        style={"margin-left": "190px", "margin-right": "190px"} 
+                        style={"margin-left": "100px", "margin-right": "100px"}
                     ),
                     width='auto'
                 ),

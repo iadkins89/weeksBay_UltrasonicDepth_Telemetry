@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 from datetime import datetime, timedelta
 from server.models import most_recent_query
 import dash_daq as daq
+import pytz
 
 register_page(
     __name__,
@@ -25,12 +26,15 @@ def layout():
 
     battery_level = most_recent_data.battery if most_recent_data and most_recent_data.battery else 0
 
+    cst = pytz.timezone('America/Chicago')
+    cst_today = datetime.now(cst).replace(hour=0, minute=0, second=0, microsecond=0)
+
     return dbc.Container([
         dbc.Row([
             dbc.Col(dcc.DatePickerRange(
                 id='graph-date-picker',
-                start_date=datetime.today(),
-                end_date=datetime.today(),
+                start_date=(cst_today - timedelta(days=1)),
+                end_date=cst_today,
                 stay_open_on_select=True,
                 minimum_nights=0,
                 style={"margin-left": "15px"}
@@ -62,11 +66,11 @@ def layout():
             }), width=8),
 
             dbc.Col(html.Div([
-                html.H4("Most Recent Tidal Recording", style={
-                    'marginBottom': '8px',
-                    'textAlign': 'center',
-                    'fontSize': '16px'
-                }),
+                    html.H4("Most Recent Tidal Recording", style={
+                        'marginBottom': '8px',
+                        'textAlign': 'center',
+                        'fontSize': '14px'
+                    }),
                 html.Div([
                     html.Div(
                         f"{round(most_recent_data.tide, 2)} m" if most_recent_data and most_recent_data.tide else "",
@@ -83,16 +87,15 @@ def layout():
                              style={
                                  'fontSize': '14px',
                                  'marginTop': '4px'
-                             }
-                             )
+                             })
                 ], style={
-                    'backgroundColor': 'white',
+                    'backgroundColor': 'rgba(247, 247, 247, 1.0)',
                     'color': '#34495E',
                     'height': '200px',
                     'width': '200px',
                     'overflowY': 'scroll',
-                    'padding': '10px',
-                    'border': '2px solid #137ea7',
+                    'padding': '0px',
+                    'border': '3px solid #D3D3D3',
                     'borderRadius': '10px',
                     'display': 'flex',
                     'flexDirection': 'column',
@@ -148,8 +151,7 @@ def layout():
                 message=''
             )),
             dbc.Col(dcc.Download(id="download-dataframe-csv"))
-        ]),
-        dbc.Row()
+        ],
+        style={"padding-bottom": "50px"}
+    )
     ])
-
-
