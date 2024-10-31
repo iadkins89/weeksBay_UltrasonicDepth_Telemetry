@@ -20,7 +20,7 @@ def register_callbacks(app):
         # Calculate dynamic range for y-axis if tide_level is not empty
         if tide_level:
             y_min = 0
-            y_max = max(tide_level) + 0.5
+            y_max = max(tide_level) + 0.25
         else:
             y_min, y_max = 0, 1  # Default range if there's no data
 
@@ -41,7 +41,7 @@ def register_callbacks(app):
                     y=1,
                     traceorder='normal'
                 ),
-                margin=dict(l=40, r=10, t=10, b=40)
+                margin=dict(l=40, r=10, t=10, b=45)
             )
         }
     @app.callback(
