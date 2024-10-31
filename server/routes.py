@@ -24,12 +24,8 @@ def setup_routes(server):
         # Format the timestamp in the desired format
         timestamp = local_dt.strftime('%Y-%m-%dT%H:%M:%S')
 
-        # Trimming tide value to three decimal places as a string, then converting back to float. Sensor only reports
-        # to three decimal places.
-        tide = float(f"{tide:.3f}")
-
         #NAVDD88 adjustment
-        tide = 1.191 - tide
+        tide = round(1.19 - tide, 3)
 
         new_data = SensorData(
             name = name,
