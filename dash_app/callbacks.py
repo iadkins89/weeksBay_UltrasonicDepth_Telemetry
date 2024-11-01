@@ -41,7 +41,7 @@ def register_callbacks(app):
                     y=1,
                     traceorder='normal'
                 ),
-                margin=dict(l=40, r=10, t=10, b=40)
+                margin=dict(l=40, r=10, t=10, b=45)
             )
         }
     @app.callback(
