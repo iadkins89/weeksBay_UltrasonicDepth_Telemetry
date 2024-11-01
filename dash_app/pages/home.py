@@ -26,7 +26,8 @@ map_graph = dcc.Graph(
             autosize=True,
             hovermode='closest',
             mapbox=dict(
-                accesstoken=os.environ.get('MAP_ACCESS_TOKEN'),
+                #accesstoken=os.environ.get('MAP_ACCESS_TOKEN'),
+                accesstoken="pk.eyJ1IjoiaWVhMjAyMSIsImEiOiJjbHh6ZXp4OWgwYXdrMmxxMTYwcmtrNGdiIn0.kchUpTpboU3YMlrUkx8HuA",
                 bearing=0,
                 center=dict(
                     lat=30.4167,
@@ -65,15 +66,15 @@ def layout():
                         "Collected sensor measurements can be viewed by clicking a sensor marker on the map"
                         "or by clicking Dashboard tab of this webpage.",
                         className="lead",
-                        style={"margin-left": "100px", "margin-right": "100px"}
+                        style={"margin-left": "5%", "margin-right": "5%"}
                     ),
-                    width='auto'
+                    width='12',
                 ),
                 style={"margin-top": "0px"}
             ),
         ],
         fluid=True,
-        style={"padding": "0px"} 
+        style={"padding": "0px"}
     )
 
     return layout

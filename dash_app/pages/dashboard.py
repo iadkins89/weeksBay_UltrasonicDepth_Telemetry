@@ -39,7 +39,6 @@ def layout():
                 minimum_nights=0,
                 style={"margin-left": "15px"}
             )),
-            dbc.Col(),
             dbc.Col(
                 html.Div(
                     dcc.Dropdown(
@@ -52,7 +51,7 @@ def layout():
                 ),
                 width=5
             )
-        ], style={'paddingTop': '5px'}),
+        ], style={'paddingTop': '5px'}, justify='end'),
 
         dbc.Row([
             dbc.Col(dcc.Graph(id='depth-graph', config={
@@ -63,10 +62,11 @@ def layout():
                     'toggleSpikelines'
                 ],
                 'displaylogo': False
-            }), width=8),
+            }), xs=12, sm=10, md=10, lg=8 ),
 
             dbc.Col(html.Div([
                     html.H4("Most Recent Tidal Recording", style={
+                        'marginTop': '10px',
                         'marginBottom': '8px',
                         'textAlign': 'center',
                         'fontSize': '14px'
