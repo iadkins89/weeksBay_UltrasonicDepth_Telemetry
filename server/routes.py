@@ -8,10 +8,10 @@ def setup_routes(server):
     @server.route('/receive_data', methods=['POST'])
     def receive_data():
         sensor_data = request.json
-        name = sensor_data["name"]
-        tide = sensor_data['decoded']['payload']['distance']
-        unix_timestamp = sensor_data['decoded']['payload']['timestamp']
-        battery = sensor_data['decoded']['payload']['battery']
+        name = sensor_data["deviceName"]
+        tide = sensor_data['object']['distance']
+        unix_timestamp = sensor_data['object']['timestamp']
+        battery = sensor_data['object']['battery']
 
 
         # Set timezone to Central Time
